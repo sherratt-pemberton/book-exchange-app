@@ -1,8 +1,11 @@
 {
-  "name": "todo-full-stack",
+  "name": "book-exchange-app",
   "version": "0.1.0",
-  "description": "Todo Full Stack",
-  "repository": "https://https://github.com/dev-academy-challenges/todo-full-stack",
+  "description": "Book Exchange App",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sherratt-pemberton/book-exchange-app.git"
+  },
   "main": "server/index.js",
   "scripts": {
     "build": "run-p build:client build:server",
@@ -21,7 +24,7 @@
   "keywords": [
     "fullstack"
   ],
-  "author": "EDA",
+  "author": "Sherratt Pemberton",
   "license": "ISC",
   "babel": {
     "presets": [
@@ -75,5 +78,9 @@
     "knex": "^0.21.17",
     "pg": "^8.5.1",
     "superagent": "^6.1.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/sherratt-pemberton/book-exchange-app/issues"
+  },
+  "homepage": "https://github.com/sherratt-pemberton/book-exchange-app#readme"
 }
