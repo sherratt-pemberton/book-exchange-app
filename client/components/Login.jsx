@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Login () {
 
@@ -13,11 +13,11 @@ function Login () {
   const [formData, setFormData] = useState(blankForm)
   const [errorMessage, setErrorMessage ] = useState('')
 
-  const changeHandeler = (event) => {
+  const handleChange = (event) => {
     setFormData((prevFormData) =>{
       return {
         ...prevFormData,
-        [ event.target.name ]: [ event.target.value ]
+        [ event.target.name ] : [ event.target.value ]
       }
     })
   } 
@@ -47,8 +47,8 @@ function Login () {
               name = 'email'
               id = 'email'
               value= {formData.email}
-              onChange = {changeHandeler}
-              className='inputForm'
+              onChange = {handleChange}
+              className='formInput'
               placeholder='youremail@email.com' 
               />  
             </ label >
@@ -61,7 +61,7 @@ function Login () {
               name = 'password'
               id = 'password'
               value= {formData.password}
-              onChange = {changeHandeler}
+              onChange = {handleChange}
               className='inputForm'
               placeholder='password' 
               />
