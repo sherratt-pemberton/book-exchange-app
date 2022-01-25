@@ -192,6 +192,10 @@ function Register () {
           <button dissabled = { formData.password != formData.confirmPassword } onClick={ onSignupClicked }>
             Sign up
             </button>
+
+          <button onClick = { () => navigate('/login') }>
+            Login
+          </button>
         </form>
       </div>
 
