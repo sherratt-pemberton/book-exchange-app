@@ -13,6 +13,7 @@ import Requests from './components/Requests'
 import Trades from './components/Trades'
 import Users from './components/Users'
 import Login from './components/Login'
+import Register from './components/Register'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk))) 
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <Route path = "trades" element = {<Trades />} />
             <Route path = "users" element = {<Users />} />
             <Route path = "login" element = {<Login />} />
+            <Route path = "register" element = {<Register />} />
           </Route>
         </Routes>
       </Provider>  
