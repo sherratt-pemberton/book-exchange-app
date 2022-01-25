@@ -17,6 +17,7 @@ function App () {
         </nav>
         <nav>
           <Link to = "login">Login</Link> | { "" }
+          <Link to = "register">Register</Link> | { "" }
         </nav>
 
         <Outlet />

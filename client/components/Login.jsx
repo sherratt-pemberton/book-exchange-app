@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { useNavigate as navigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 function Login () {
+
+  const navigate = useNavigate()
 
   const blankForm = {
   email:'',
@@ -73,13 +75,13 @@ function Login () {
 
           <br/><br/>
 
-          <button onClick={ navigate( '/forgot-password' ) }>
+          <button onClick={ () => navigate( '/forgot-password' ) }>
             Forgot Password
             </button>
 
           <br/><br/>
 
-          <button onClick={ navigate( '/signup' ) }>
+          <button onClick={ () => navigate( '/register' ) }>
             Sign up
             </button>
 
