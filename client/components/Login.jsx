@@ -68,7 +68,9 @@ function Login () {
             </ label >
 
           <br/><br/>
-
+          <hr />
+          <br/><br/>
+          
           <button disabled = { !formData.email || !formData.password } onClick={ onLoginClicked }>
             Login
             </button>

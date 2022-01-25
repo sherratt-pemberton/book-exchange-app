@@ -104,7 +104,9 @@ function Register () {
           </label>
           
           <br/><br/>
-
+          <hr />
+          <br/><br/>
+          
           <label calssName= 'register-form'>Confirm password
           <input
             type= 'text'
