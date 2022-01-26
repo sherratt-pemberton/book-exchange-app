@@ -1,14 +1,28 @@
 import React from 'react'
+import { Link, Outlet } from 'react-router-dom'
+
+
 
 function App () {
   return (
     <>
-      <header className="header">
+      <div>
         <h1>Book Exchange</h1>
-      </header>
-      <section className="main">
-        {/* add your code here */}
-      </section>
+
+        <nav>
+          <Link to = "books">Books</Link> | { "" }
+          <Link to = "requests">Requests</Link> | { "" }
+          <Link to = "trades">Trades</Link> | { "" }
+          <Link to = "users">Users</Link> | { "" }
+        </nav>
+        <nav>
+          <Link to = "login">Login</Link> | { "" }
+          <Link to = "register">Register</Link> | { "" }
+          <Link to = "account">Account</Link> | { "" }
+        </nav>
+
+        <Outlet />
+      </div>
     </>
   )
 }
