@@ -15,6 +15,7 @@ import Users from './components/Users'
 import Login from './components/Login'
 import Register from './components/Register'
 import Account from './components/Account'
+import {PrivateRoute} from './auth/PrivateRoute'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk))) 
@@ -29,12 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <Routes>
           <Route path = "*" element = {<App />} >
             <Route path = "books" element = {<Books />} />
-            <Route path = "requests" element = {<Requests />} />
-            <Route path = "trades" element = {<Trades />} />
-            <Route path = "users" element = {<Users />} />
+            <Route path = "requests" element = {PrivateRoute( <Requests /> )} />
+            <Route path = "trades" element = {PrivateRoute( <Trades /> )} />
+            <Route path = "users" element = { PrivateRoute( <Users /> )} />
             <Route path = "login" element = {<Login />} />
+            <Route path = "account" element = {PrivateRoute( <Account /> )} />
             <Route path = "register" element = {<Register />} />
-            <Route path = "account" element = {<Account />} />
           </Route>
         </Routes>
       </Provider>  

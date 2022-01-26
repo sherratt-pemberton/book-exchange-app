@@ -49,7 +49,7 @@ function Register () {
         </header>
 
         <form onSubmit={handleSubmit} className='form-Body'>
-        <label calssName= 'register-form'>First name
+        <label className= 'register-form'>First name
           <input
             type= 'text'
             name = 'firstName'
@@ -63,7 +63,7 @@ function Register () {
           
           <br/><br/>
 
-          <label calssName= 'register-form'>Last name
+          <label className= 'register-form'>Last name
           <input
             type= 'text'
             name = 'lastName'
@@ -77,7 +77,7 @@ function Register () {
           
           <br/><br/>
 
-          <label calssName= 'register-form'>Email
+          <label className= 'register-form'>Email
           <input
             type= 'text'
             name = 'email'
@@ -91,7 +91,7 @@ function Register () {
 
           <br/><br/>
 
-          <label calssName= 'register-form'>Password
+          <label className= 'register-form'>Password
           <input
             type= 'text'
             name = 'password'
@@ -103,11 +103,9 @@ function Register () {
             />
           </label>
           
-          <br/><br/>
-          <hr />
-          <br/><br/>
+          <br /><br />
           
-          <label calssName= 'register-form'>Confirm password
+          <label className= 'register-form'>Confirm password
           <input
             type= 'text'
             name = 'confirmPassword'
@@ -121,7 +119,7 @@ function Register () {
 
           <br/><br/>
           
-          <label calssName= 'register-form'>Street
+          <label className= 'register-form'>Street
           <input
             type= 'text'
             name = 'street'
@@ -135,7 +133,7 @@ function Register () {
           
           <br/><br/>
 
-          <label calssName= 'register-form'>Suburb
+          <label className= 'register-form'>Suburb
           <input
             type= 'text'
             name = 'suburb'
@@ -149,7 +147,7 @@ function Register () {
           
           <br/><br/>
 
-          <label calssName= 'register-form'>City
+          <label className= 'register-form'>City
           <input
             type= 'text'
             name = 'city'
@@ -163,7 +161,7 @@ function Register () {
 
           <br/><br/>
           
-          <label calssName= 'register-form'>PostCode
+          <label className= 'register-form'>PostCode
           <input
             type= 'text'
             name = 'postCode'
@@ -177,7 +175,7 @@ function Register () {
           
           <br/><br/>
 
-          <label calssName= 'register-form'>Country
+          <label className= 'register-form'>Country
           <input
             type= 'text'
             name = 'country'
@@ -190,8 +188,10 @@ function Register () {
           </label>
 
           <br/><br/>
+          <hr />
+          <br/><br/>
 
-          <button dissabled = { formData.password != formData.confirmPassword } onClick={ onSignupClicked }>
+          <button onClick={ onSignupClicked }>
             Sign up
             </button>
 
