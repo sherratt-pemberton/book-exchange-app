@@ -11,6 +11,8 @@ module.exports = router
 //route checks for exsisting user in the database
 //if the user email does not exsist a new account is posted
 //the server then responsds with a json web token
+//inputs: user register form data from front end
+//outputs: json web token
 
 router.post ('/', async (req,res) =>{
    const {email, password} = req.body
@@ -21,7 +23,7 @@ router.post ('/', async (req,res) =>{
 
    const users = await db.getAllUsers()
 
-   console.log( "users from the database", users )
+   // console.log( "users from the database", users )
 
    if (users.find( user => user.email == email )){
       console.log( "email found")
@@ -31,48 +33,40 @@ router.post ('/', async (req,res) =>{
       const passwordHash = await bcrypt.hash(password, 10) 
    
       try{
-         return( 
-            db.addUser({
+          
+         return(   db.addUser({
                firstName: req.body.firstName,
                lastName: req.body.lastName,
                email: email,
                passwordHash,         
                isVerified: false
-            }) 
-         )
-         .then( user =>{
-            console.log( user )
-            res.sendStatus(201)
+            }) )
+         .then( newUserId =>{
+            return (
+               jwt.sign({
+                  userId: newUserId,
+                  firstName: req.body.firstName,
+                  lastName: req.body.lastName,
+                  email: email,
+                  passwordHash,         
+                  isVerified: false
+               },
+                  process.env.JWT_SECRET,
+                  {
+                     expiresIn: '2d'
+                  },
+                  (err, token)=>{
+                     if( err ){
+                        return res.status(500).send(err)
+                     }
+                     res.status(200).json({ token })
+                  }
+               )
+            )
          })
       }
       catch ( err ) {
          res.status(500).send(err.message)
       }
    }
-
-
-   // const accountSignupInfo = {
-   //    firstName: req.body.firstName,
-   //    lastName: req.body.lastName,
-   //    email: email,
-   // }
-   
-   // .then(user => {
-      //    jwt.sign({
-      //       user:id,
-      //       accountSignupInfo,
-      //       isVerified:false
-      //    }, )
-      //    process.env.JWT_SECRET,
-      //    {
-      //       expiresIn: '2d'
-      //    },
-      //    (err, token)=>{
-      //       if( err ){
-      //          return res.status(500).send(err)
-      //       }
-      //       res.status(200).json({ token })
-      //    }
-      // })
-//   }
 })

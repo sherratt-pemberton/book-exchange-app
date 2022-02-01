@@ -4,9 +4,10 @@ function getAllUsers (db = conn) {
    return db ('users')
 }
 
-function userExsists (userEmail, db = conn) {
+function getUserById (userID, db = conn) {
    return db ('users')
-   .where('email', userEmail)
+   .where('id', userID)
+   .first()
 }
 
 function addUser ( userData, db = conn){
@@ -14,10 +15,8 @@ function addUser ( userData, db = conn){
    .insert(userData)
 }
 
-
-
 module.exports = {
    getAllUsers,
-   userExsists,
+   getUserById,
    addUser
 } 
