@@ -3,7 +3,6 @@ const router = require('express').Router()
 const bcrypt = require( 'bcrypt' )
 const jwt = require( 'jsonwebtoken' )
 const db = require('../db/users')
-const { database } = require('pg/lib/defaults')
 
 module.exports = router
 
@@ -15,39 +14,36 @@ module.exports = router
 //outputs: json web token
 
 router.post ('/', async (req,res) =>{
-   const {email, password} = req.body
-
-   console.log( req.body )
-
-   console.log( email, password)
-
+   const newUser = req.body.userData
    const users = await db.getAllUsers()
 
-   // console.log( "users from the database", users )
+   console.log("data:", newUser)
 
-   if (users.find( user => user.email == email )){
+   if (users.find( user => user.email == newUser.email )){
       console.log( "email found")
       res.sendStatus(409)
    }
    else{ 
-      const passwordHash = await bcrypt.hash(password, 10) 
+      console.log("password:", newUser.password)
+      const passwordHash = await bcrypt.hash(newUser.password, 10) 
    
-      try{
-          
-         return(   db.addUser({
-               firstName: req.body.firstName,
-               lastName: req.body.lastName,
-               email: email,
+      try{     
+         return(   
+            db.addUser({
+               firstName: newUser.firstName,
+               lastName: newUser.lastName,
+               email: newUser.email,
                passwordHash,         
                isVerified: false
-            }) )
+            }) 
+         )
          .then( newUserId =>{
             return (
                jwt.sign({
                   userId: newUserId,
-                  firstName: req.body.firstName,
-                  lastName: req.body.lastName,
-                  email: email,
+                  firstName: newUser.firstName,
+                  lastName: newUser.lastName,
+                  email: newUser.email,
                   passwordHash,         
                   isVerified: false
                },
