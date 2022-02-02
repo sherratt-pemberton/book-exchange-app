@@ -1,228 +1,235 @@
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { registerUser } from '../actions/userActions'
+import { postUser } from '../apis/usersApis'
 
-function Register () {
-  
-  const navigate = useNavigate()
 
-  const blankForm = {
+function Register(){
+  const dispatch = useDispatch()
+
+  const [form, setForm] = useState({
     firstName:"",
     lastName:"",
     email:"",
     confirmEmail:"",
     password:"",
-    confirmPassword:"",
-    // address : {
-    //   street:"",
-    //   suburb:"",
-    //   city:"",
-    //   country:"",
-    //   postCode:""
-    // }
-  }
-
-  const [formData, setFormData] = useState(blankForm) 
-  const [errorMessage, setErrorMessage] = useState('')
+    confirmPassword:""
+  })
 
   const handleChange = (event) => {
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [ event.target.name ] : [event.target.value]
-      }
+    const {name, value} = event.target
+    setForm({
+      ...form,
+      [name]:value
     })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event) =>{
     event.preventDefault()
-    setFormData( blankForm )
-  }
 
-  const onSignupClicked = () => {
-    alert("Sign up not implimented")
-  }
+    const newUser = form
 
+    console.log( "calling redux action,",
+      newUser
+    )
+//    postUser( newUser )
+    dispatch(registerUser(newUser))
+    // .catch( err => setError(err.message) )
+  }
+  
   return (
     <>
-      <div>
-        <header classname="header">
-          <h1>Register</h1>
-        </header>
-
-        <form onSubmit={handleSubmit} classname='form-Body'>
-        <label calssName= 'register-form'>First name
+      <form >
+      
+        <br/><br/>
+        <label >First name</label>
           <input
-            type= 'text'
-            name = 'firstName'
-            id = 'firstName'
-            value = {FormData.firstName}
-            onChange = {handleChange}
-            classname = 'formInput'
-            required
-            />
-          </label>
-          
-          <br/><br/>
+          type= 'text'
+          name = 'firstName'
+          id = 'firstName'
+          value = {form.firstName}
+          onChange = {handleChange}
+          // required
+          />
+        
+        <br/><br/>
 
-          <label calssName= 'register-form'>Last name
+        <label>Last name</label>
           <input
             type= 'text'
             name = 'lastName'
             id = 'lastName'
-            value = {FormData.lastName}
+            value = {form.lastName}
             onChange = {handleChange}
-            classname = 'formInput'
-            required
-            />
-          </label>
-          
-          <br/><br/>
+            // required
+          />
 
-          <label calssName= 'register-form'>Email
+      <br/><br/>
+
+        <label>Email </label>
           <input
             type= 'text'
             name = 'email'
             id = 'email'
-            value = {FormData.email}
+            value = {form.email}
             onChange = {handleChange}
-            classname = 'formInput'
-            required
-            />
-          </label>
-
+            // required
+          />
+        
           <br/><br/>
 
-          <label calssName= 'register-form'>Confirm Email
+        <label >Confirm Email </label>
           <input
             type= 'text'
-            name = 'confirm-email'
-            id = 'confirm-email'
-            value = {FormData.confirmEmail}
+            name = 'confirmEmail'
+            id = 'confirmEmail'
+            value = {form.confirmEmail}
             onChange = {handleChange}
-            classname = 'formInput'
-            required
+            // required
             />
-          </label>
-
-          <br/><br/>
-
-          <label calssName= 'register-form'>Password
-          <input
-            type= 'text'
-            name = 'password'
-            id = 'password'
-            value = {FormData.password}
-            onChange = {handleChange}
-            classname = 'formInput'
-            required
-            />
-          </label>
           
           <br/><br/>
 
-          <label calssName= 'register-form'>Confirm password
-          <input
-            type= 'text'
-            name = 'confirmPassword'
-            id = 'confirmPassword'
-            value = {FormData.confirmPassword}
-            onChange = {handleChange}
-            classname = 'formInput'
-            required
-            />
-          </label>
-
-          <br/><br/>
-          <hr />
-          {/* <br/><br/> */}
+          <label >Password </label>
+            <input
+              type= 'text'
+              name = 'password'
+              id = 'password'
+              value = {form.password}
+              onChange = {handleChange}
+              // required
+              />
           
-          
-          {/* <label calssName= 'register-form'>Street
-          <input
-            type= 'text'
-            name = 'street'
-            id = 'street'
-            value = {FormData.street}
-            onChange = {handleChange}
-            classname = 'formInput'
-            required
-            />
-          </label>
-          
-          <br/><br/>
+            <br/><br/>
 
-          <label calssName= 'register-form'>Suburb
-          <input
-            type= 'text'
-            name = 'suburb'
-            id = 'suburb'
-            value = {FormData.suburb}
-            onChange = {handleChange}
-            classname = 'formInput'
-            required
-            />
-          </label>
-          
-          <br/><br/>
-
-          <label calssName= 'register-form'>City
-          <input
-            type= 'text'
-            name = 'city'
-            id = 'city'
-            value = {FormData.city}
-            onChange = {handleChange}
-            classname = 'formInput'
-            required
-            />
-          </label>
-
-          <br/><br/>
-          
-          <label calssName= 'register-form'>PostCode
-          <input
-            type= 'text'
-            name = 'postCode'
-            id = 'postCode'
-            value = {FormData.postCode}
-            onChange = {handleChange}
-            classname = 'formInput'
-            required
-            />
-          </label>
-          
-          <br/><br/>
-
-          <label calssName= 'register-form'>Country
-          <input
-            type= 'text'
-            name = 'country'
-            id = 'country'
-            value = {FormData.country}
-            onChange = {handleChange}
-            classname = 'formInput'
-            required
-            />
-          </label> */}
-
-          <br/><br/>
-
-          <button dissabled = { (formData.email != formData.confirmEmail) && 
-                                (formData.password != formData.confirmPassword) } 
-                  onClick={ onSignupClicked }>
+          <label >Confirm password </label>
+            <input
+              type= 'text'
+              name = 'confirmPassword'
+              id = 'confirmPassword'
+              value = {form.confirmPassword}
+              onChange = {handleChange}
+              // required
+              />
+            
+            <br/><br/>
+            <hr />
+            <br/><br/>
+    
+          <button 
+            onClick={ handleSubmit }>
             Sign up
             </button>
 
-          <button onClick = { () => navigate('/login') }>
+          <button 
+            onClick = { () => navigate('/login') }>
             Login
-          </button>
-        </form>
-      </div>
+            </button>
 
-
-
+      </form>
     </>
   )
 }
 
 export default Register
+// function Register () {
+  
+//   const navigate = useNavigate()
+  
+
+//   const [errorMessage, setErrorMessage] = useState('')
+
+//   const handleChange = (event) => {
+
+//     const {name, value} = event.target
+    
+//     setForm({
+//       ...form,
+//       [name]: value
+//       })
+//     }
+
+//     const onSignupClicked = (event) => {
+//       event.preventDefault()
+//       dispatch( registerUser( form ))
+//     }
+      
+//     return (
+//       <>
+//         <div>
+//           <header classname="header">
+//             <h1>Register</h1>
+//           </header>
+
+//           <form classname='form-Body'>
+              
+//               <br/><br/>
+
+              
+//               <br/><br/>
+
+
+
+//           </form>
+//         </div>
+//       </>
+//     )
+//   }
+
+//})
+
+// setFormData((prevFormData) => {
+//   return {
+//     ...prevFormData,
+//     [ event.target.name ] : [event.target.value]
+//   }
+// })
+
+
+// const handleSubmit = (event) => {
+//   event.preventDefault()
+//   setFormData( blankForm )
+// }
+// dissabled = { (form.email != formData.confirmEmail) && 
+          //                       (formData.password != formData.confirmPassword) } 
+
+            {/* <label classname= 'register-form'>City
+            <input
+              type= 'text'
+              name = 'city'
+              id = 'city'
+              value = {FormData.city}
+              onChange = {handleChange}
+              classname = 'formInput'
+              // required
+              />
+            </label>
+
+            <br/><br/>
+            
+            <label classname= 'register-form'>PostCode
+            <input
+              type= 'text'
+              name = 'postCode'
+              id = 'postCode'
+              value = {FormData.postCode}
+              onChange = {handleChange}
+              classname = 'formInput'
+              required
+              />
+            </label>
+            
+            <br/><br/>
+
+            <label classname= 'register-form'>Country
+            <input
+              type= 'text'
+              name = 'country'
+              id = 'country'
+              value = {FormData.country}
+              onChange = {handleChange}
+              classname = 'formInput'
+              required
+              />
+            </label> */}
