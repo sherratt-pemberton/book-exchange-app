@@ -7,6 +7,9 @@ node_modules
 # SQLite DBs
 *.sqlite3
 
+#user data
+server/db/userData.json
+
 # Webpack bundle
 server/public/bundle.js
 server/public/bundle.js.map

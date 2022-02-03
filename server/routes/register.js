@@ -15,6 +15,8 @@ module.exports = router
 
 router.post ('/', async (req,res) =>{
    const newUser = req.body.userData
+//   const newUser = req.body
+
    const users = await db.getAllUsers()
 
    console.log("data:", newUser)
@@ -26,7 +28,6 @@ router.post ('/', async (req,res) =>{
    else{ 
       console.log("password:", newUser.password)
       const passwordHash = await bcrypt.hash(newUser.password, 10) 
-   
       try{     
          return(   
             db.addUser({
